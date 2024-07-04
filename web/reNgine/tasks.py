@@ -384,8 +384,7 @@ def subdomain_discovery(
 		host = self.subdomain.name if self.subdomain else self.domain.name
 
 	if self.url_filter:
-		logger.warning(f'Ignoring subdomains scan as an URL path filter was passed ({
-		               self.url_filter}).')
+		logger.warning(f'Ignoring subdomains scan as an URL path filter was passed ({self.url_filter}).')
 		return
 
 	# Config
