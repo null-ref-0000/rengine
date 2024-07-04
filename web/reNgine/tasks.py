@@ -1201,8 +1201,7 @@ def screenshot(self, ctx={}, description=None):
 	send_output_file = notification.send_scan_output_file if notification else False
 
 	# Run cmd
-	cmd = f'python3 /usr/src/github/EyeWitness/Python/EyeWitness.py -f {
-	    alive_endpoints_file} -d {screenshots_path} --no-prompt'
+	cmd = f'python3 /usr/src/github/EyeWitness/Python/EyeWitness.py -f {alive_endpoints_file} -d {screenshots_path} --no-prompt'
 	cmd += f' --timeout {timeout}' if timeout > 0 else ''
 	cmd += f' --threads {threads}' if threads > 0 else ''
 	run_command(
@@ -1212,8 +1211,7 @@ def screenshot(self, ctx={}, description=None):
 		scan_id=self.scan_id,
 		activity_id=self.activity_id)
 	if not os.path.isfile(output_path):
-		logger.error(f'Could not load EyeWitness results at {
-		             output_path} for {self.domain.name}.')
+		logger.error(f'Could not load EyeWitness results at {output_path} for {self.domain.name}.')
 		return
 
 	# Loop through results and save objects in DB
