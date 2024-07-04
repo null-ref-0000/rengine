@@ -462,8 +462,7 @@ def subdomain_discovery(
 			elif tool == 'tlsx':
 				results_file = self.results_dir + '/subdomains_tlsx.txt'
 				cmd = f'tlsx -san -cn -silent -ro -host {host}'
-				cmd += f" | sed -n '/^\([a-zA-Z0-9]\([-a-zA-Z0-9]*[a-zA-Z0-9]\)\?\.\)\+{
-				                        host}$/p' | uniq | sort"
+				cmd += f" | sed -n '/^\([a-zA-Z0-9]\([-a-zA-Z0-9]*[a-zA-Z0-9]\)\?\.\)\+{host}$/p' | uniq | sort"
 				cmd += f' > {results_file}'
 
 			elif tool == 'netlas':
@@ -471,8 +470,7 @@ def subdomain_discovery(
 				cmd = f'netlas search -d domain -i domain domain:"*.{host}" -f json'
 				netlas_key = get_netlas_key()
 				cmd += f' -a {netlas_key}' if netlas_key else ''
-				cmd_extract = f"grep -oE '([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+{
-				                           host}'"
+				cmd_extract = f"grep -oE '([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+{host}'"
 				cmd += f' | {cmd_extract} > {results_file}'
 
 		elif tool in custom_subdomain_tools:
@@ -484,12 +482,10 @@ def subdomain_discovery(
 			custom_tool = tool_query.first()
 			cmd = custom_tool.subdomain_gathering_command
 			if '{TARGET}' not in cmd:
-				logger.error(f'Missing {{TARGET}} placeholders in {
-				             tool} configuration. Skipping.')
+				logger.error(f'Missing {{TARGET}} placeholders in {tool} configuration. Skipping.')
 				continue
 			if '{OUTPUT}' not in cmd:
-				logger.error(f'Missing {{OUTPUT}} placeholders in {
-				             tool} configuration. Skipping.')
+				logger.error(f'Missing {{OUTPUT}} placeholders in {tool} configuration. Skipping.')
 				continue
 
 			cmd = cmd.replace('{TARGET}', host)
