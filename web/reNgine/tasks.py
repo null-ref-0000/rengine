@@ -4763,7 +4763,7 @@ def gpt_vulnerability_description(vulnerability_id):
 
 
 def fetch_h1_bookmarked():
-	 """
+	"""
     Fetches bookmarked programs from HackerOne API using pagination.
 
     Returns:
