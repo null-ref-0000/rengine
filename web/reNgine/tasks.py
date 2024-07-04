@@ -1851,8 +1851,7 @@ def fetch_url(self, urls=[], ctx={}, description=None):
 	cat_input = f'cat {input_path}'
 	grep_output = f'grep -Eo {host_regex}'
 	cmd_map = {
-		tool: f'{cat_input} | {cmd} | {grep_output} > {
-		    self.results_dir}/urls_{tool}.txt'
+		tool: f'{cat_input} | {cmd} | {grep_output} > {self.results_dir}/urls_{tool}.txt'
 		for tool, cmd in cmd_map.items()
 	}
 	tasks = group(
@@ -1874,8 +1873,7 @@ def fetch_url(self, urls=[], ctx={}, description=None):
 	if ignore_file_extension:
 		ignore_exts = '|'.join(ignore_file_extension)
 		grep_ext_filtered_output = [
-			f'cat {self.output_path} | grep -Eiv "\\.({ignore_exts}).*" > {
-			                                          self.results_dir}/urls_filtered.txt',
+			f'cat {self.output_path} | grep -Eiv "\\.({ignore_exts}).*" > {self.results_dir}/urls_filtered.txt',
 			f'mv {self.results_dir}/urls_filtered.txt {self.output_path}'
 		]
 		sort_output.extend(grep_ext_filtered_output)
@@ -1964,8 +1962,7 @@ def fetch_url(self, urls=[], ctx={}, description=None):
 		# Run gf on current pattern
 		logger.warning(f'Running gf on pattern "{gf_pattern}"')
 		gf_output_file = f'{self.results_dir}/gf_patterns_{gf_pattern}.txt'
-		cmd = f'cat {self.output_path} | gf {
-		    gf_pattern} | grep -Eo {host_regex} >> {gf_output_file}'
+		cmd = f'cat {self.output_path} | gf {gf_pattern} | grep -Eo {host_regex} >> {gf_output_file}'
 		run_command(
 			cmd,
 			shell=True,
@@ -1975,8 +1972,7 @@ def fetch_url(self, urls=[], ctx={}, description=None):
 
 		# Check output file
 		if not os.path.exists(gf_output_file):
-			logger.error(f'Could not find GF output file {
-			             gf_output_file}. Skipping GF pattern "{gf_pattern}"')
+			logger.error(f'Could not find GF output file {gf_output_file}. Skipping GF pattern "{gf_pattern}"')
 			continue
 
 		# Read output file line by line and
@@ -2000,8 +1996,7 @@ def fetch_url(self, urls=[], ctx={}, description=None):
 			earlier_pattern = None
 			if not created:
 				earlier_pattern = endpoint.matched_gf_patterns
-			pattern = f'{earlier_pattern},{
-			    gf_pattern}' if earlier_pattern else gf_pattern
+			pattern = f'{earlier_pattern},{gf_pattern}' if earlier_pattern else gf_pattern
 			endpoint.matched_gf_patterns = pattern
 			endpoint.save()
 
