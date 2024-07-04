@@ -1641,8 +1641,7 @@ def dir_file_fuzz(self, ctx={}, description=None):
 	cmd += f' -e {extensions_str}' if extensions else ''
 	cmd += f' -maxtime {max_time}' if max_time > 0 else ''
 	cmd += f' -p {delay}' if delay > 0 else ''
-	cmd += f' -recursion -recursion-depth {
-	    recursive_level} ' if recursive_level > 0 else ''
+	cmd += f' -recursion -recursion-depth {recursive_level} ' if recursive_level > 0 else ''
 	cmd += f' -t {threads}' if threads and threads > 0 else ''
 	cmd += f' -timeout {timeout}' if timeout and timeout > 0 else ''
 	cmd += ' -se' if stop_on_error else ''
