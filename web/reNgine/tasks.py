@@ -423,8 +423,7 @@ def subdomain_discovery(
 		if tool in default_subdomain_tools:
 			if tool == 'amass-passive':
 				use_amass_config = config.get(USE_AMASS_CONFIG, False)
-				cmd = f'amass enum -passive -d {host} -o {
-				    self.results_dir}/subdomains_amass.txt'
+				cmd = f'amass enum -passive -d {host} -o {self.results_dir}/subdomains_amass.txt'
 				cmd += ' -config /root/.config/amass.ini' if use_amass_config else ''
 
 			elif tool == 'amass-active':
@@ -432,14 +431,12 @@ def subdomain_discovery(
 				amass_wordlist_name = config.get(
 				    AMASS_WORDLIST, 'deepmagic.com-prefixes-top50000')
 				wordlist_path = f'/usr/src/wordlist/{amass_wordlist_name}.txt'
-				cmd = f'amass enum -active -d {host} -o {
-				    self.results_dir}/subdomains_amass_active.txt'
+				cmd = f'amass enum -active -d {host} -o {self.results_dir}/subdomains_amass_active.txt'
 				cmd += ' -config /root/.config/amass.ini' if use_amass_config else ''
 				cmd += f' -brute -w {wordlist_path}'
 
 			elif tool == 'sublist3r':
-				cmd = f'python3 /usr/src/github/Sublist3r/sublist3r.py -d {host} -t {
-				    threads} -o {self.results_dir}/subdomains_sublister.txt'
+				cmd = f'python3 /usr/src/github/Sublist3r/sublist3r.py -d {host} -t {threads} -o {self.results_dir}/subdomains_sublister.txt'
 
 			elif tool == 'subfinder':
 				cmd = f'subfinder -d {host} -o {self.results_dir}/subdomains_subfinder.txt'
@@ -460,8 +457,7 @@ def subdomain_discovery(
 			elif tool == 'ctfr':
 				results_file = self.results_dir + '/subdomains_ctfr.txt'
 				cmd = f'python3 /usr/src/github/ctfr/ctfr.py -d {host} -o {results_file}'
-				cmd_extract = f"cat {
-				    results_file} | sed 's/\*.//g' | tail -n +12 | uniq | sort > {results_file}"
+				cmd_extract = f"cat {results_file} | sed 's/\*.//g' | tail -n +12 | uniq | sort > {results_file}"
 				cmd += f' && {cmd_extract}'
 
 			elif tool == 'tlsx':
