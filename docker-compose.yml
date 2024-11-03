@@ -150,6 +150,18 @@ services:
     networks:
       - rengine_network
 
+  torProxy:
+    restart: always
+    image: zhaowde/rotating-tor-http-proxy
+    hostname: rotating-tor-http-proxy
+    ports:
+      - 3128:3128/tcp
+    environment:
+      TOR_INSTANCES=5
+      TOR_REBUILD_INTERVAL=3600
+    networks:
+      - rengine_network
+
 networks:
   rengine_network:
 

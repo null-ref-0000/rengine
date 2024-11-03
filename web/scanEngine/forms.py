@@ -378,7 +378,7 @@ class ProxyForm(forms.ModelForm):
                 "id": "proxies",
                 "rows": "10",
                 "spellcheck": "false",
-                "placeholder": "http://username:password@proxyip.com:port",
+                "placeholder": "http://rotating-tor-http-proxy:3128",
             }))
 
     def set_value(self, key):
@@ -389,7 +389,7 @@ class ProxyForm(forms.ModelForm):
             self.fields['proxies'].widget.attrs['readonly'] = True
 
     def set_initial(self):
-        self.initial['use_proxy'] = False
+        self.initial['use_proxy'] = True
         self.fields['proxies'].widget.attrs['readonly'] = True
 
 
